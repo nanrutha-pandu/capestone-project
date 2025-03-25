@@ -1,9 +1,9 @@
 pipeline {
     agent any
     environment {
-        DEST_PATH = "/var/www/html/index-azure.html"
-        INVENTORY_FILE = "/home/ubuntu/inventory.ini"
-        PLAYBOOK_FILE = "/home/ubuntu/playbook.yml"
+        DEST_PATH = "/var/www/html"
+        INVENTORY_FILE = "/home/nanrutha/inventory.ini"
+        PLAYBOOK_FILE ="/home/nanrutha/playbook.yml"
     }
     stages {
         stage('Checkout Code') {
@@ -11,9 +11,11 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/nanrutha-pandu/capestone-project.git'
             }
         }
-        stage('Deploy AWS HTML') {
+        stage('Deploy AZURE HTML') {
             steps {
-                sh 'sudo -u ubuntu ansible-playbook -i /home/ubuntu/inventory.ini /home/ubuntu/playbook.yml'
+                sh 'sudo -u nanrutha /usr/bin/ansible-playbook -i /home/nanrutha/inventory.ini /home/nanrutha/playbook.yml --become --become-user=root'
+
+
             }
         }
     }
