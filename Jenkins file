@@ -1,9 +1,9 @@
 pipeline {
     agent any
     environment {
-        DEST_PATH = "/var/www/html"
+        DEST_PATH = "/var/www/html/index-azure.html"
         INVENTORY_FILE = "/home/ubuntu/inventory.ini"
-        PLAYBOOK_FILE = "/home/ubuntu/playbook.yaml"
+        PLAYBOOK_FILE = "/home/ubuntu/playbook.yml"
     }
     stages {
         stage('Checkout Code') {
@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Deploy AWS HTML') {
             steps {
-                sh 'sudo -u ubuntu ansible-playbook -i /home/ubuntu/inventory.ini /home/ubuntu/playbook.yaml'
+                sh 'sudo -u ubuntu ansible-playbook -i /home/ubuntu/inventory.ini /home/ubuntu/playbook.yml'
             }
         }
     }
